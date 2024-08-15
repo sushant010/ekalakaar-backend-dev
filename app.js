@@ -16,7 +16,7 @@ const __dirname = path.dirname(__filename);
 const file = fs.readFileSync(path.resolve(__dirname, "../swagger.yaml"), "utf8");
 const swaggerDocument = YAML.parse(file);
 
-import ApiError from "./utils/ApiError.js";
+import ApiError from "./src/utils/ApiError.js";
 
 const app = express();
 
@@ -48,16 +48,16 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-import globalErrorHandler from "./controllers/error.controllers.js";
+import globalErrorHandler from "./src/controllers/error.controllers.js";
 
-import authRouter from "./routes/auth.routes.js";
-import queryRouter from "./routes/query.routes.js";
-import adminRouter from "./routes/admin.routes.js";
-import artistRouter from "./routes/artist.routes.js";
-import patronRouter from "./routes/patron.routes.js";
-import opportunityRouter from "./routes/opportunity.routes.js";
+import authRouter from "./src/routes/auth.routes.js";
+import queryRouter from "./src/routes/query.routes.js";
+import adminRouter from "./src/routes/admin.routes.js";
+import artistRouter from "./src/routes/artist.routes.js";
+import patronRouter from "./src/routes/patron.routes.js";
+import opportunityRouter from "./src/routes/opportunity.routes.js";
 
-app.get('/api/v1/health', (req, res) => {
+app.get('/', (req, res) => {
   res.status(200).send('OK');
 });
 app.use("/api/v1/admin", adminRouter);
