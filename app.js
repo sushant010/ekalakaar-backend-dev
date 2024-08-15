@@ -6,15 +6,15 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import path from "path";
 import fs from "fs";
-import swaggerUi from "swagger-ui-express";
+// import swaggerUi from "swagger-ui-express";
 import { fileURLToPath } from "url";
 import YAML from "yaml";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const file = fs.readFileSync(path.resolve(__dirname, "../swagger.yaml"), "utf8");
-const swaggerDocument = YAML.parse(file);
+// const file = fs.readFileSync(path.resolve(__dirname, "../swagger.yaml"), "utf8");
+// const swaggerDocument = YAML.parse(file);
 
 import ApiError from "./src/utils/ApiError.js";
 
@@ -67,13 +67,13 @@ app.use("/api/v1/artists", artistRouter);
 app.use("/api/v1/patrons", patronRouter);
 app.use("/api/v1/quries", queryRouter);
 
-app.use(
-  "/api-docs",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, {
-    customSiteTitle: "eKalakaar API docs",
-  })
-);
+// app.use(
+//   "/api-docs",
+//   swaggerUi.serve,
+//   swaggerUi.setup(swaggerDocument, {
+//     customSiteTitle: "eKalakaar API docs",
+//   })
+// );
 
 app.all("*", (req, res, next) => {
   next(new ApiError(`Can't find ${req.originalUrl} on this server! Please visit /api-docs for comprehensive documentation on all available API routes.`, 404));
